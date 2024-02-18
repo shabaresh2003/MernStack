@@ -7,9 +7,12 @@ const {
     updateworkout
 } =require('../Contollers/workoutcontrollers')
 
+const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router()
 //get all the worksouts data from db 
+router.use(requireAuth)
+
 router.get('/',getworkouts)
 
 //get the  workout by id
