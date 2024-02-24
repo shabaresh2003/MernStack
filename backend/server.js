@@ -9,7 +9,7 @@ app.use((req,res,next)=>{
     console.log(req.path,req.method);
     next();
 })
-
+// app.use(express.urlencoded({extended:true}))
 
 app.use('/api/workouts',workoutRoutes);
 app.use('/api/user',userroutes);
