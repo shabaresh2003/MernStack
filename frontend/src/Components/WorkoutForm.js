@@ -32,7 +32,7 @@ const WorkoutForm = () => {
 
     const json = await response.json();
 
-    if (json.error != null) {
+    if (!response.ok) {
       setError(json.error);
 
       // Check if json.emptyFields exists before setting the state
@@ -41,7 +41,7 @@ const WorkoutForm = () => {
       } else {
         setemptyfields([]); // Set it to an empty array if not present
       }
-    } else {
+    } if(response.ok){
       settitle('');
       setload('');
       setreps('');
@@ -55,7 +55,7 @@ const WorkoutForm = () => {
     }
   };
 
-  const hasError = (field) => emptyFields.includes(field);
+  
 
   return (
     <form className="create" onSubmit={handleSubmit}>
@@ -65,7 +65,7 @@ const WorkoutForm = () => {
         type="text"
         onChange={(e) => settitle(e.target.value)}
         value={title}
-        className={hasError('title') ? 'error' : ''}
+        className={emptyFields.includes('title') ? 'error':""}
       />
 
       <label> Load (kg) : </label>
@@ -73,7 +73,7 @@ const WorkoutForm = () => {
         type="number"
         onChange={(e) => setload(e.target.value)}
         value={load}
-        className={hasError('load') ? 'error' : ''}
+        className={emptyFields.includes('load') ? 'error':""}
       /><br />
 
       <label> Reps : </label>
@@ -81,7 +81,7 @@ const WorkoutForm = () => {
         type="number"
         onChange={(e) => setreps(e.target.value)}
         value={reps}
-        className={hasError('reps') ? 'error' : ''}
+        className={emptyFields.includes('Reps') ? 'error':""}
       /><br />
 
       <button>Add Workout</button>

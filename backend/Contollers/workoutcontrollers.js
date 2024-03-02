@@ -1,15 +1,14 @@
 const Workout = require('../models/Workoutmodel');
-const User = require('../models/usermodel');
 const mongoose = require("mongoose")
 
 //Get all workouts
 const getworkouts = async (req,res)=>
 {
-    const user_id = req.user_id
+    const user_id = req.user._id
     const workouts = await Workout.find({user_id}).sort({createdAt : -1})
     res.status(200).json(workouts);
 }
-//get single workout
+
 const getsingleworkout = async (req,res)=>
 {
     const { id } =req.params
@@ -49,7 +48,7 @@ const createWorkout = async (req,res)=>
     }
 
     try{
-        const user_id = User.findById(req.user_id)
+        const user_id = req.user._id
         const workout = await Workout.create({title,load,reps,user_id})
         return res.status(200).json(workout)
     }
@@ -57,7 +56,7 @@ const createWorkout = async (req,res)=>
     {
         return res.status(400).json({error:error.message})
     }
-    res.json({mssg:'post asibngle workout'})
+
 }
 //delete workout 
 const deleteWorkout = async (req,res)=>

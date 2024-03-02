@@ -12,10 +12,10 @@ const requireAuth = require('../middleware/requireAuth')
 const router = express.Router()
 //get all the worksouts data from db 
 router.use(requireAuth)
-router.get("/", requireAuth,getworkouts);
+router.get("/",getworkouts);
 
 //get the  workout by id
-router.get("/:id", requireAuth, getsingleworkout);
+router.get("/:id", getsingleworkout);
 
 //post the workout 
 router.post("/",createWorkout);

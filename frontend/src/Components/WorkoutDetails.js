@@ -7,6 +7,10 @@ const WorkoutDetails = ({ workout }) => {
     const {user} = UseAuthContext()
 
     const handleClick = async () => {
+        if(!user)
+        {
+            return 
+        }
         const response = await fetch('/api/workouts/' + workout._id, {
             method: 'DELETE',
             headers : {'Authorization': `Bearer ${user.token}`}
