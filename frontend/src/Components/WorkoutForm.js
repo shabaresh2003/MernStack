@@ -48,8 +48,6 @@ const WorkoutForm = () => {
       setError(null);
       setemptyfields([]);
 
-      console.log("New Workout added");
-      console.log(workout);
 
       dispatch({ type: "CREATE_WORKOUTS", payload: json });
     }
